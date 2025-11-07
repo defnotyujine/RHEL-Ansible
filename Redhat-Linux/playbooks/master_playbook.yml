@@ -1,0 +1,45 @@
+---
+- name: Master Playbook for Red Hat Linux Systems
+  hosts: all
+  become: true
+  vars_files:
+    - group_vars/group_vars.yml
+
+  tasks:
+    - name: Run Preliminaries
+      ansible.builtin.include_tasks: preliminaries/prelims.yml
+
+    # - name: Include Install and Configure Samba
+    #   ansible.builtin.include_role:
+    #     name: Samba_Install_Configure
+
+    # - name: Include Install and Configure HTTPD Web Server
+    #   ansible.builtin.include_role:
+    #     name: httpd
+
+    # - name: Include ClamAV Configuration
+    #   ansible.builtin.include_role:
+    #     name: clamav
+
+    # - name: Include Firewalld Configuration
+    #   ansible.builtin.include_role:
+    #     name: firewalld
+
+    # - name: Include Keycloak Installation
+    #   ansible.builtin.include_role:
+    #     name: keycloak
+
+    # - name: Include Zabbix Server Installation
+    #   ansible.builtin.include_role:
+    #     name: zabbix
+
+    # - name: Include Section 1 RHEL9 CIS Hardening
+    #   ansible.builtin.import_role:
+    #     name: hardening
+
+# - name: Include RHEL 9 Hardening and Goss Auditing
+#   hosts: all
+#   gather_facts: false
+#   roles:
+#     # - role: RHEL9-CIS-devel
+#     # - role: RHEL9-CIS-Audit
