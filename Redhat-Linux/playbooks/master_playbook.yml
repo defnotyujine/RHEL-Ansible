@@ -6,8 +6,8 @@
     - group_vars/group_vars.yml
 
   tasks:
-    - name: Run Preliminaries
-      ansible.builtin.include_tasks: preliminaries/prelims.yml
+    # - name: Run Preliminaries
+    #   ansible.builtin.include_tasks: preliminaries/prelims.yml
 
     # - name: Include Install and Configure Samba
     #   ansible.builtin.include_role:
@@ -37,9 +37,10 @@
     #   ansible.builtin.import_role:
     #     name: hardening
 
-# - name: Include RHEL 9 Hardening and Goss Auditing
-#   hosts: all
-#   gather_facts: false
-#   roles:
-#     # - role: RHEL9-CIS-devel
-#     # - role: RHEL9-CIS-Audit
+- name: Include RHEL 9 Hardening and Goss Auditing
+  hosts: all
+  gather_facts: false
+  roles:
+    - role: RHEL9-CIS-v2.0
+    # - role: RHEL9-CIS-devel
+    - role: RHEL9-CIS-Audit
