@@ -41,6 +41,6 @@
   hosts: all
   gather_facts: false
   roles:
-    - role: RHEL9-CIS-v2.0
+    # - role: RHEL9-CIS-v2.0
     # - role: RHEL9-CIS-devel
     - role: RHEL9-CIS-Audit

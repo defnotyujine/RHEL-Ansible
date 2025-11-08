@@ -4,3 +4,6 @@ rhel9_cis_audit: RHEL9-CIS-Audit
 rhel9_cis_audit_path_and_file: /opt/RHEL9-CIS-Audit/run_audit.sh
 goss_binary_link: https://github.com/goss-org/goss/releases/download/v0.4.4/goss-linux-amd64
 goss_destination_path: /usr/local/bin/goss
+rhel9cis_results_dir: "/opt"
+rhel9cis_output_dir: "{{ playbook_dir }}/roles/RHEL9-CIS-Audit/results/"  # {{ inventory_hostname }}/" # " roles/RHEL9-CIS-Audit/results/{{ inventory_hostname }}"
+rhel9cis_results_pattern: "audit_localhost*" # .localdomain-CIS-RHEL9_*.json"
