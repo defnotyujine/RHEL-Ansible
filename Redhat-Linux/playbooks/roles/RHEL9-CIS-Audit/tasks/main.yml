@@ -38,10 +38,10 @@
     owner: root
     group: root
 
-- name: Execute run_audit.sh
-  ansible.builtin.command: bash {{rhel9_cis_audit_path_and_file}}
-  args:
-    chdir: "/opt/{{rhel9_cis_audit}}"
+# - name: Execute run_audit.sh
+#   ansible.builtin.command: bash {{rhel9_cis_audit_path_and_file}}
+#   args:
+#     chdir: "/opt/{{rhel9_cis_audit}}"
 
 # - name: Run split-results-nodupes.py on the latest audit JSON file
 #   ansible.builtin.shell: |
@@ -64,3 +64,21 @@
 #   ansible.builtin.debug:
 #     msg: "{{ split_results_output.stdout }}"  
 
+- name: Find all CIS audit files on remote host
+  ansible.builtin.find:
+    paths: "{{ rhel9cis_results_dir }}"
+    patterns: "{{ rhel9cis_results_pattern }}"
+  register: cis_audit_files
+
+- name: Ensure results directory for the host exists
+  ansible.builtin.file:
+    path: "{{ rhel9cis_output_dir }}/{{ inventory_hostname }}/"
+    state: directory
+    mode: '0755'
+
+- name: Fetch all CIS audit results from managed host
+  ansible.builtin.fetch:
+    src: "{{ item.path }}"
+    dest: "{{ rhel9cis_output_dir }}/{{ inventory_hostname }}/"
+    flat: yes
+  loop: "{{ cis_audit_files.files }}"
